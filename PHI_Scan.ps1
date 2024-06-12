@@ -28,7 +28,7 @@ if (-not (Test-Path -Path $logFileDirectory)) {
         New-Item -Path $logFileDirectory -ItemType Directory -Force -ErrorAction Stop
         Write-Host "Created directory for log file: $logFileDirectory"
     } catch {
-        Write-Host "Failed to create directory for log file: $_"
+        Write-Host "Failed to create directory for log file: ${_}"
         exit
     }
 }
@@ -38,7 +38,7 @@ try {
     Add-Content -Path $logFile -Value "PHI Scan Log File Initialization" -ErrorAction Stop
     Write-Host "Log file created successfully at $logFile"
 } catch {
-    Write-Host "Failed to create log file at $logFile: $_"
+    Write-Host "Failed to create log file at $logFile: ${_}"
     exit
 }
 

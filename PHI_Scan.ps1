@@ -22,13 +22,15 @@ function Search-PHI {
     )
 
     # Read file content
-    $content = Get-Content -Path $filePath -ErrorAction SilentlyContinue
+    $content = Get-Content -Path $filePath -ErrorAction SilentlyContinue -Raw
     if ($content) {
         foreach ($pattern in $patterns) {
             if ($content -match $pattern) {
                 # Log the file path and matched pattern
-                $match = [regex]::Matches($content, $pattern) | ForEach-Object { $_.Value }
-                Add-Content -Path $logFile -Value "$filePath - Matched Pattern: $pattern - Value: $match"
+                $matches = [regex]::Matches($content, $pattern)
+                foreach ($match in $matches) {
+                    Add-Content -Path $logFile -Value "$filePath - Matched Pattern: $pattern - Value: $($match.Value)"
+                }
             }
         }
     }
@@ -44,4 +46,5 @@ foreach ($drive in $networkDrives) {
     }
 }
 
+# Ensure proper string termination
 Write-Host "PHI scan completed. Results are logged in $logFile"

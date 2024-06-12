@@ -1,0 +1,1 @@
+findstr /R /S /C:"[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]" "\\hneit\homes\kmoker\*.*" > C:\Temp\PHI_ScanResults.log

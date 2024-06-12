@@ -1,0 +1,14 @@
+PS C:\Temp> C:\Temp\phi_discovery.ps1
+PHI scan completed. Results are logged in C:\Temp\PHI_ScanResults.log
+Failed to create log file at C:\Temp\PHI_ScanResults.log
+
+PS C:\Temp> C:\Temp\phi_discovery.ps1
+Test-Path : Cannot bind argument to parameter 'Path' because it is an empty string.
+At C:\Temp\phi_discovery.ps1:18 char:27
++ if (-not (Test-Path -Path (Split-Path -Path $logFile -Parent))) {
++                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Test-Path], ParameterBindingValidationException
+    + FullyQualifiedErrorId : ParameterArgumentValidationErrorEmptyStringNotAllowed,Microsoft.PowerShell.Commands.TestPathCommand
+ 
+PHI scan completed. Results are logged in PHI_ScanResults.log
+Failed to create log file at PHI_ScanResults.log

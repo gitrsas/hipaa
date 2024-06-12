@@ -12,26 +12,11 @@ $patterns = @(
 )
 
 # Define the log file to store results with a specific path
-$logFile = "C:\Users\kmoker\Temp\PHI_ScanResults.txt"
+$logFile = "C:\Temp\PHI_ScanResults.log"
 
 # Ensure the log file directory exists
 if (-not (Test-Path -Path (Split-Path -Path $logFile -Parent))) {
-    try {
-        New-Item -Path (Split-Path -Path $logFile -Parent) -ItemType Directory -Force -ErrorAction Stop
-        Write-Host "Created directory for log file: $(Split-Path -Path $logFile -Parent)"
-    } catch {
-        Write-Host "Failed to create directory for log file: $_"
-        exit
-    }
-}
-
-# Create the log file
-try {
-    Add-Content -Path $logFile -Value "PHI Scan Log File Initialization" -ErrorAction Stop
-    Write-Host "Log file created successfully at $logFile"
-} catch {
-    Write-Host "Failed to create log file at $logFile: $_"
-    exit
+    New-Item -Path (Split-Path -Path $logFile -Parent) -ItemType Directory -Force
 }
 
 # Function to search for PHI in files
@@ -75,5 +60,6 @@ if (Test-Path -Path $logFile) {
 } else {
     Write-Host "Failed to create log file at $logFile"
 }
+
 
 

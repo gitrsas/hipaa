@@ -1,1 +1,18 @@
 findstr /R /S /C:"[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]" "\\hneit\homes\kmoker\*.*" > C:\Temp\PHI_ScanResults.log
+
+Batch file example
+----------------------------------------------------------------------------------------------------------------------
+@echo off
+set logFile=C:\Temp\PHI_ScanResults.log
+
+echo Scanning for SSNs...
+findstr /R /S /C:"\b[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]\b" "\\hneit\homes\kmoker\*.*" 2> nul >> %logFile%
+
+echo Scanning for Emails...
+findstr /R /S /C:"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b" "\\hneit\homes\kmoker\*.*" 2> nul >> %logFile%
+
+echo Scanning for Phone Numbers...
+findstr /R /S /C:"\b[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]\b" "\\hneit\homes\kmoker\*.*" 2> nul >> %logFile%
+
+echo PHI scan completed. Results are logged in %logFile%
+-----------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 # Define network drives to search
-$networkDrives = @("\\networkDrive1\path", "\\networkDrive2\path")
+$networkDrives = @("\\hneit\homes\kmoker")
 
 # Define file types to scan
 $fileTypes = @("*.txt", "*.docx", "*.xlsx", "*.csv")
@@ -11,8 +11,13 @@ $patterns = @(
     "\b\d{3}-\d{3}-\d{4}\b" # Phone number
 )
 
-# Define the log file to store results
-$logFile = "PHI_ScanResults.log"
+# Define the log file to store results with a specific path
+$logFile = "C:\Temp\PHI_ScanResults.log"
+
+# Ensure the log file directory exists
+if (-not (Test-Path -Path (Split-Path -Path $logFile -Parent))) {
+    New-Item -Path (Split-Path -Path $logFile -Parent) -ItemType Directory -Force
+}
 
 # Function to search for PHI in files
 function Search-PHI {
@@ -48,3 +53,11 @@ foreach ($drive in $networkDrives) {
 
 # Ensure proper string termination
 Write-Host "PHI scan completed. Results are logged in $logFile"
+
+# Verify if the log file is created
+if (Test-Path -Path $logFile) {
+    Write-Host "Log file created successfully at $logFile"
+} else {
+    Write-Host "Failed to create log file at $logFile"
+}
+

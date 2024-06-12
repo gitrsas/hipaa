@@ -12,3 +12,17 @@ At C:\Temp\phi_discovery.ps1:18 char:27
  
 PHI scan completed. Results are logged in PHI_ScanResults.log
 Failed to create log file at PHI_ScanResults.log
+
+New Error
+
+
+At C:\Temp\phi_discovery.ps1:41 char:46
++     Write-Host "Failed to create log file at $logFile: $_"
++                                              ~~~~~~~~~
+Variable reference is not valid. ':' was not followed by a valid variable name character. Consider using ${} to delimit the name.
+At C:\Temp\phi_discovery.ps1:83 char:8
++ } else {
++        ~
+Missing closing '}' in statement block or type definition.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidVariableReferenceWithDrive

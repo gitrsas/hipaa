@@ -16,3 +16,32 @@ findstr /R /S /C:"\b[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]\b" "\\h
 
 echo PHI scan completed. Results are logged in %logFile%
 -----------------------------------------------------------------------------------------------------------------------
+
+@echo off
+setlocal enabledelayedexpansion
+
+:: Define the network drive and log file path
+set networkDrive=\\hneit\homes\kmoker
+set logFile=C:\temp\search_log.txt
+
+:: Clear the log file if it exists
+if exist %logFile% del %logFile%
+
+:: Search for Social Security Numbers (SSNs), Email addresses, and Phone numbers
+echo Searching for Social Security Numbers (SSNs), Email addresses, and Phone numbers in %networkDrive% >> %logFile%
+echo. >> %logFile%
+
+:: Pattern for SSNs: ###-##-####
+findstr /r /n /c:"[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]" %networkDrive%\*.* >> %logFile%
+
+:: Pattern for Email addresses: simple regex for demonstration
+findstr /r /n /c:"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" %networkDrive%\*.* >> %logFile%
+
+:: Pattern for Phone numbers: (###) ###-####
+findstr /r /n /c:"([0-9][0-9][0-9]) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]" %networkDrive%\*.* >> %logFile%
+findstr /r /n /c:"[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]" %networkDrive%\*.* >> %logFile%
+
+echo. >> %logFile%
+echo Search complete. Results are logged in %logFile%
+endlocal
+______________________________________________________________________________________________________________________

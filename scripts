@@ -73,3 +73,9 @@ findstr /r /n "[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]" "%networkDr
 echo. >> "%logFile%"
 echo Search complete. Results are logged in %logFile%
 endlocal
+
+_____________________________________________________________________________________________
+Single line using findstr to find ssns
+
+findstr /s /r "[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]" "\\hneit\homes\kmoker\*.*" > "C:\temp\ssn_search_log.txt"
+

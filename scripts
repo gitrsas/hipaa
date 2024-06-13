@@ -80,4 +80,36 @@ Single line using findstr to find ssns
 findstr /s /r "[0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]" "\\hneit\homes\kmoker\*.*" > "C:\temp\ssn_search_log.txt"
 findstr /s /r "[a-zA-Z0-9._%+-][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-][a-zA-Z0-9.-]*\.[a-zA-Z][a-zA-Z]*" "\\hneit\homes\kmoker\*.*" > "C:\temp\email_search_log.txt"
 
+_________________________________________________________________________________________________________
 
+# Define the network path
+$networkPath = "\\hneit\homes\kmoker"
+
+# Define the regex pattern for SSNs
+$ssnPattern = "\b\d{3}-\d{2}-\d{4}\b"
+
+# Get all files in the network path recursively
+$files = Get-ChildItem -Path $networkPath -Recurse -File
+
+# Initialize an array to hold the filenames with SSNs
+$filesWithSSNs = @()
+
+# Iterate through each file
+foreach ($file in $files) {
+    # Read the file content
+    try {
+        $content = Get-Content -Path $file.FullName -ErrorAction Stop
+        # Check if the content matches the SSN pattern
+        if ($content -match $ssnPattern) {
+            # Add the filename to the array if it contains an SSN
+            $filesWithSSNs += $file.FullName
+        }
+    } catch {
+        # Handle any errors (e.g., access denied, binary files)
+        Write-Warning "Could not read file: $($file.FullName) - $_"
+    }
+}
+
+# Output the filenames that contain SSNs
+$filesWithSSNs | ForEach-Object { Write-Output $_ }
+____________________________________________________________________________________
